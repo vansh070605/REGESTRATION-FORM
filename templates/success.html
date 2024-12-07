@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Successful</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='forms.css') }}">
+</head>
+<body>
+    <h1>Registration Successful</h1>
+    <p>Your data has been saved successfully!</p>
+
+    <h2>Entered Data:</h2>
+    <table border="1">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Mobile</th>
+            <th>Email</th>
+            <th>Date of Birth</th>
+            <th>Username</th>
+            <th>Password</th>
+        </tr>
+        <tr>
+            <td>{{ user_data.first_name }}</td>
+            <td>{{ user_data.last_name }}</td>
+            <td>{{ user_data.age }}</td>
+            <td>{{ user_data.gender }}</td>
+            <td>{{ user_data.mobile }}</td>
+            <td>{{ user_data.email }}</td>
+            <td>{{ user_data.dob }}</td>
+            <td>{{ user_data.username }}</td>
+            <td>{{ user_data.password }}</td> <!-- You can choose to hide the password if needed -->
+        </tr>
+    </table>
+
+    <br>
+    <a href="/">Go Back to Registration</a>
+</body>
+</html>

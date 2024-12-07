@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='forms.css') }}">
+</head>
+<body>
+    <h1>Registration Form in HTML</h1>
+    <form id="registrationForm" action="/submit" method="POST">
+        <table>
+            <tr>
+                <td>First Name:</td>
+                <td><input type="text" name="first_name" placeholder="Enter your First Name" value="{{ user_data.first_name if user_data else '' }}" required></td>
+            </tr>
+            <tr>
+                <td>Last Name:</td>
+                <td><input type="text" name="last_name" placeholder="Enter your Last Name" value="{{ user_data.last_name if user_data else '' }}" required></td>
+            </tr>
+            <tr>
+                <td>Age:</td>
+                <td><input type="text" placeholder="Enter your Age" name="age" value="{{ user_data.age if user_data else '' }}" required></td>
+            </tr>
+            <tr>
+                <td>Gender:</td>
+                <td>
+                    <input type="radio" name="choice" value="Male" {% if user_data and user_data.gender == 'Male' %}checked{% endif %}> Male
+                    <input type="radio" name="choice" value="Female" {% if user_data and user_data.gender == 'Female' %}checked{% endif %}> Female
+                </td>
+            </tr>
+            <tr>
+                <td>Mobile Number:</td>
+                <td><input type="tel" name="mobile" placeholder="9876xxxxxx" value="{{ user_data.mobile if user_data else '' }}" maxlength="10" required></td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td><input type="email" name="email" placeholder="example@example.com" value="{{ user_data.email if user_data else '' }}" required></td>
+            </tr>
+            <tr>
+                <td>DOB:</td>
+                <td><input type="date" name="dob" value="{{ user_data.dob if user_data else '' }}" required></td>
+            </tr>
+            <tr>
+                <td>Username:</td>
+                <td><input type="text" name="username" minlength="5" maxlength="25" placeholder="Enter your username" value="{{ user_data.username if user_data else '' }}" required></td>
+            </tr>
+            <tr>
+                <td>Password:</td>
+                <td>
+                    <div style="position: relative;">
+                        <input type="password" name="password" id="password" minlength="8" maxlength="25" placeholder="Enter your password" value="{{ user_data.password if user_data else '' }}" required>
+                        <button type="button" class="eye-button" onclick="togglePassword()">👁️</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" value="Submit">
+                    <input type="reset" value="Reset">
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <script>
+        function togglePassword() {
+            const passwordField = document.getElementById('password');
+            passwordField.type = passwordField.type === 'password' ? 'text' : 'password';
+        }
+    </script>
+</body>
+</html>

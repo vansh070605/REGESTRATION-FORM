@@ -1,0 +1,199 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    color: white;
+}
+
+h1 {
+    text-align: center;
+    color: #fff;
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+form {
+    background-color: rgba(0, 0, 0, 0.7); 
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 500px;
+}
+
+h1 {
+    text-align:center;
+    color: white;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-spacing: 15px 10px;
+}
+
+input[type="text"], 
+input[type="tel"], 
+input[type="email"], 
+input[type="date"], 
+input[type="username"], 
+input[type="password"], 
+input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    margin-top: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus, 
+input[type="tel"]:focus, 
+input[type="email"]:focus, 
+input[type="date"]:focus, 
+input[type="username"]:focus, 
+input[type="password"]:focus {
+    border-color: #5c9dff;
+    outline: none;
+}
+
+input[type="radio"] {
+    margin-right: 10px;
+}
+
+label {
+    font-size: 16px;
+    color: #555;
+}
+
+input[type="submit"], 
+input[type="reset"] {
+    width: 48%;
+    padding: 12px;
+    background-color: #5c9dff;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover, 
+input[type="reset"]:hover {
+    background-color: #4a8cf7;
+}
+
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+input[type="file"] {
+    padding: 5px;
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 24px;
+    }
+
+    form {
+        padding: 20px;
+    }
+
+    input[type="submit"], 
+    input[type="reset"] {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+/* Add styling for the age input field */
+#age, .input-field {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+/* Styling the eye icon button */
+.eye-button {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;  /* Position the icon to the right */
+    top: 50%;
+    transform: translateY(-50%);  /* Center the icon vertically */
+}
+
+/* Styling the password input field */
+input[type="password"] {
+    padding-right: 40px;  /* Add space for the eye icon */
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+}
+
+/* Styling the password input field */
+input[type="password"] {
+    padding: 8px;
+    font-size: 16px;
+    width: 300px; /* Adjust width as needed */
+}
+
+/* Styling the eye icon button */
+.eye-button {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 10px;
+    vertical-align: middle;  /* Align the button with the password input */
+}
+
+/* Optional: Add spacing between the eye icon and the password field */
+.eye-button {
+    padding: 5px;
+    position: relative;
+    top: -4px; /* Adjust to align with the password input */
+}
+/* Styling the password container to align input and eye icon */
+.password-container {
+    display: flex;
+    align-items: center;
+}
+
+/* Styling the password input field */
+input[type="password"] {
+    padding: 8px;
+    font-size: 16px;
+    width: 300px; /* Adjust width as needed */
+}
+
+/* Styling the eye icon button */
+.eye-button {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 10px;
+    margin-top: 30px;
+    vertical-align: middle;  /* Align the button with the password input */
+}
+
+/* Optional: Add spacing between the eye icon and the password field */
+.eye-button {
+    padding: 5px;
+}
+

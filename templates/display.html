@@ -5,10 +5,133 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registered Users</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='forms.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+            position: relative; /* Ensures the export button is positioned relative to the body */
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .export-button {
+            background-color: #f44336;  /* Red background color */
+            color: white;
+            font-size: 16px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .export-button:hover {
+            background-color: #e53935;  /* Darker red color on hover */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 60px; /* Adjust for the button height */
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+        }
+
+        td {
+            font-size: 14px;
+            color: #555;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dataTables_wrapper {
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .dataTables_length, .dataTables_filter {
+            font-size: 14px;
+        }
+
+        .dataTables_paginate {
+            text-align: center;
+        }
+
+        .dataTables_paginate a {
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+
+        .dataTables_paginate a:hover {
+            background-color: #45a049;
+        }
+
+        .dataTables_paginate .current {
+            background-color: #388e3c;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #c0392b;
+        }
+
+        img {
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+        }
+    </style>
 </head>
 <body>
     <h1>Registered Users</h1>
-    <table border="1">
+
+    <!-- Export button -->
+    <button class="export-button" onclick="exportTableToExcel('usersTable', 'users')">Export to Excel</button>
+
+    <table id="usersTable" class="display">
         <thead>
             <tr>
                 <th>First Name</th>
@@ -19,6 +142,7 @@
                 <th>Email</th>
                 <th>DOB</th>
                 <th>Username</th>
+                <th>Photo</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -34,14 +158,54 @@
                 <td>{{ row[7] }}</td>
                 <td>{{ row[8] }}</td>
                 <td>
-                    <form action="{{ url_for('delete_user', user_id=row[0]) }}" method="POST">
-                        <button type="submit">Delete</button>
+                    {% if row[10] %}
+                    <img src="{{ row[10] }}" alt="User Photo">
+                    {% else %}
+                        No photo
+                    {% endif %}
+                </td>
+                <td>
+                    <form method="POST" action="{{ url_for('delete_user', user_id=row[0]) }}">
+                        <button type="submit" class="btn">Delete</button>
                     </form>
                 </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+
+    <!-- jQuery and DataTables JS -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        // Initialize DataTable
+        $('#usersTable').DataTable();
+    });
+
+    function exportTableToExcel(tableId, filename) {
+        var table = document.getElementById(tableId);
+        var rows = table.rows;
+        var csv = [];
+        for (var i = 0; i < rows.length; i++) {
+            var row = rows[i];
+            var cells = row.cells;
+            var csvRow = [];
+            for (var j = 0; j < cells.length; j++) {
+                csvRow.push('"' + cells[j].innerText + '"');
+            }
+            csv.push(csvRow.join(','));
+        }
+
+        var csvString = csv.join('\n');
+        var blob = new Blob([csvString], { type: 'text/csv' });
+        var link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = filename + '.csv';
+        link.click();
+    }
+</script>
     <br>
     <a href="/">Go Back to Registration</a>
 </body>

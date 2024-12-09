@@ -11,3 +11,11 @@ function togglePassword() {
         passwordField.type = "password";  // Hide password
     }
 }
+document.getElementById("exportBtn").addEventListener("click", function () {
+    // Get table data
+    var table = document.querySelector(".user-table");
+    var wb = XLSX.utils.table_to_book(table, { sheet: "Sheet1" });
+    
+    // Export the data to Excel
+    XLSX.writeFile(wb, "UserData.xlsx");
+});

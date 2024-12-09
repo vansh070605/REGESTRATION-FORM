@@ -8,7 +8,19 @@
 </head>
 <body>
     <h1>Registration Form in HTML</h1>
-    <form id="registrationForm" action="/submit" method="POST">
+
+    <!-- Flash messages display -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <form id="registrationForm" action="/submit" method="POST" enctype="multipart/form-data">
         <table>
             <tr>
                 <td>First Name:</td>
@@ -55,6 +67,10 @@
                 </td>
             </tr>
             <tr>
+                <td>Upload Photo:</td>
+                <td><input type="file" name="photo" id="photo" accept="image/*" required></td>
+            </tr>            
+            <tr>
                 <td colspan="2">
                     <input type="submit" value="Submit">
                     <input type="reset" value="Reset">
@@ -62,6 +78,11 @@
             </tr>
         </table>
     </form>
+
+    <!-- Button to see registered users -->
+    <a href="{{ url_for('display') }}">
+        <button class="form-button">See Registered Users</button>
+    </a>
 
     <script>
         function togglePassword() {

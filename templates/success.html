@@ -4,12 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registered Users</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='forms.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='success.css') }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body>
-    <h1>Registered Users</h1>
+    <h1>Welcome, {{ user[1] }} {{ user[2] }}!</h1>  <!-- Display the logged-in user's name -->
+    
 
+    <!-- Family Members Section -->
+    <h3>Your Family Members:</h3>
+    <table class="family-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Age</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if family_members %}
+                {% for member in family_members %}
+                    <tr>
+                        <td>{{ member[2] }}</td>  <!-- name -->
+                        <td>{{ member[3] }}</td>  <!-- gender -->
+                        <td>{{ member[4] }}</td>  <!-- age -->
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="3" style="text-align: center;">No family members found.</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+
+    <!-- Option to add family members -->
+    <br>
+    <a href="{{ url_for('add_family_member') }}" class="btn add-family-member">Add Family Member</a>
+
+    <h2>Registered Users</h2>
     <!-- Export Button -->
     <button id="exportBtn" class="export-button">Export to Excel</button>
 
@@ -25,28 +58,38 @@
                 <th>Email</th>
                 <th>Date of Birth</th>
                 <th>Username</th>
-                <th>Password</th>
             </tr>
         </thead>
         <tbody>
+            <!-- Display the logged-in user's information as the first row -->
+            <tr>
+                <td>{{ user[1] }}</td>  <!-- first_name -->
+                <td>{{ user[2] }}</td>  <!-- last_name -->
+                <td>{{ user[3] }}</td>  <!-- age -->
+                <td>{{ user[4] }}</td>  <!-- gender -->
+                <td>{{ user[5] }}</td>  <!-- mobile -->
+                <td>{{ user[6] }}</td>  <!-- email -->
+                <td>{{ user[7] }}</td>  <!-- dob -->
+                <td>{{ user[8] }}</td>  <!-- username -->
+            </tr>
+            <!-- Loop through all registered users -->
             {% for user in users %}
                 <tr>
-                    <td>{{ user.first_name }}</td>
-                    <td>{{ user.last_name }}</td>
-                    <td>{{ user.age }}</td>
-                    <td>{{ user.gender }}</td>
-                    <td>{{ user.mobile }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>{{ user.dob }}</td>
-                    <td>{{ user.username }}</td>
-                    <td>{{ user.password }}</td>
+                    <td>{{ user[1] }}</td>  <!-- first_name -->
+                    <td>{{ user[2] }}</td>  <!-- last_name -->
+                    <td>{{ user[3] }}</td>  <!-- age -->
+                    <td>{{ user[4] }}</td>  <!-- gender -->
+                    <td>{{ user[5] }}</td>  <!-- mobile -->
+                    <td>{{ user[6] }}</td>  <!-- email -->
+                    <td>{{ user[7] }}</td>  <!-- dob -->
+                    <td>{{ user[8] }}</td>  <!-- username -->
                 </tr>
             {% endfor %}
         </tbody>
     </table>
 
     <br>
-    <a href="/">Go Back to Registration</a>
+    <a href="/" class="btn go-back-registration">Go Back to Registration</a>
 
     <script>
         document.getElementById("exportBtn").addEventListener("click", function () {

@@ -22,21 +22,15 @@ form {
     background-color: rgba(0, 0, 0, 0.7); 
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     width: 100%;
-    max-width: 500px;
-}
-
-h1 {
-    text-align:center;
-    color: white;
-    font-size: 28px;
-    margin-bottom: 20px;
+    max-width: 600px;
+    box-sizing: border-box;
 }
 
 table {
     width: 100%;
     border-spacing: 15px 10px;
+    margin-top: 20px;
 }
 
 input[type="text"], 
@@ -65,17 +59,9 @@ input[type="password"]:focus {
     outline: none;
 }
 
-input[type="radio"] {
-    margin-right: 10px;
-}
-
-label {
-    font-size: 16px;
-    color: #555;
-}
-
 input[type="submit"], 
-input[type="reset"] {
+input[type="reset"],
+.see-registered-users {
     width: 48%;
     padding: 12px;
     background-color: #5c9dff;
@@ -88,39 +74,224 @@ input[type="reset"] {
 }
 
 input[type="submit"]:hover, 
-input[type="reset"]:hover {
+input[type="reset"]:hover,
+.see-registered-users:hover {
     background-color: #4a8cf7;
 }
 
-input[type="checkbox"] {
-    margin-right: 10px;
+.see-registered-users {
+    width: 100%;
+    margin-top: 10px;
+    background-color: #4a8cf7;
+    padding: 12px;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s;
 }
 
-input[type="file"] {
-    padding: 5px;
+.see-registered-users:hover {
+    background-color: #3a80e0;
 }
 
-@media (max-width: 600px) {
-    h1 {
-        font-size: 24px;
-    }
-
-    form {
-        padding: 20px;
-    }
-
-    input[type="submit"], 
-    input[type="reset"] {
-        width: 100%;
-        margin-top: 10px;
-    }
+/* Table styling */
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #2a3d49; 
+    border-radius: 8px;
 }
-/* Add styling for the age input field */
-#age, .input-field {
+
+.user-table th, .user-table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #444;
+}
+
+.user-table th {
+    background-color: #3e4c59;
+    color: #fff;
+}
+
+.user-table tr:nth-child(even) {
+    background-color: #3b4b58;
+}
+
+.user-table tr:nth-child(odd) {
+    background-color: #2a3d49;
+}
+
+.user-table tr:hover {
+    background-color: #55636d;
+    color: white;
+}
+
+.user-table td {
+    color: #ddd;
+}
+
+.action-column {
+    background-color: transparent;
+    padding: 0;
+}
+
+.action-button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    text-align: center;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    box-shadow: none;
+    outline: none;
+    background: #f44336;
+}
+
+.action-button:hover {
+    background-color: #e53935;
+}
+
+
+.action-column form {
+    display: inline-block;
+    margin: 0;
+}
+
+
+.eye-button {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.password-container {
+    display: flex;
+    align-items: center;
+}
+
+.input-field {
     width: 100%;
     padding: 10px;
     margin: 5px 0;
     border-radius: 4px;
     border: 1px solid #ccc;
     font-size: 16px;
+}
+
+.go-back-button {
+    background-color: #ffa500;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.go-back-button:hover {
+    background-color: #ff7f00;
+}
+
+@media (max-width: 600px) {
+    .go-back-button {
+        width: 100%;
+        margin-top: 20px;
+    }
+}
+
+.go-back-button {
+    background-color: #ffa500;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s, transform 0.3s ease;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 300px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.go-back-button:hover {
+    background-color: #ff7f00;
+    transform: translateY(-3px);
+}
+
+.go-back-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #ff7f00;
+}
+
+@media (max-width: 600px) {
+    .go-back-button {
+        width: 100%;
+        margin-top: 20px;
+    }
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+li {
+    padding: 10px;
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+}
+
+a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    font-size: 16px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 20px;
+    text-align: center;
+}
+
+a:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+}
+
+a:active {
+    background-color: #1c6f98;
+}
+
+.export-button {
+    background-color: #f44336;
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.export-button:hover {
+    background-color: #e53935;
 }

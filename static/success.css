@@ -1,0 +1,151 @@
+/* Styles for Success Page */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #28a745; /* Green success background */
+    color: white;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    text-align: center;
+    position: relative;
+}
+
+/* Page Heading */
+h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+/* Paragraph Text */
+p {
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+/* Table Styling */
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: white;
+    color: #28a745;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+table th, table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: center;
+    font-size: 16px;
+}
+
+table th {
+    background-color: #218838;
+    color: white;
+    font-size: 18px;
+}
+
+table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+table tr:hover {
+    background-color: #e8f5e9;
+}
+
+/* Buttons */
+button {
+    background-color: #fff;
+    color: #28a745;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    margin: 10px 0;
+}
+
+button:hover {
+    background-color: #218838;
+    color: white;
+}
+
+/* Export Button Styling */
+.export-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: white;
+    color: #28a745;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: 2px solid #28a745;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.export-button:hover {
+    background-color: #218838;
+    color: white;
+}
+
+/* Add Family Member Button */
+.add-family-member {
+    background-color: #007bff; /* Blue background */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s ease;
+}
+
+.add-family-member:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* Go Back to Registration Button */
+.go-back-registration {
+    background-color: #ffc107; /* Yellow background */
+    color: black;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s ease;
+}
+
+.go-back-registration:hover {
+    background-color: #e0a800;
+    transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    table {
+        width: 95%;
+    }
+
+    h1 {
+        font-size: 36px;
+    }
+
+    p {
+        font-size: 18px;
+    }
+
+    button, .export-button {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+}

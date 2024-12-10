@@ -8,17 +8,15 @@ from flask import send_file
 from io import BytesIO
 
 app = Flask(__name__)
-app.secret_key = "app.secret_key"  # For flashing messages
+app.secret_key = "app.secret_key"
 
-# MySQL Database Configuration
 DB_CONFIG = {
-    'host': 'localhost',        # Replace with your MySQL host
-    'user': 'root',             # Replace with your MySQL username
-    'password': 'root',         # Replace with your MySQL password
-    'database': 'users',        # Replace with your MySQL database name
+    'host': 'localhost',
+    'user': 'root',         
+    'password': 'root',        
+    'database': 'users',
 }
 
-# Allowed file extensions for photo uploads
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 def allowed_file(filename):
@@ -62,7 +60,6 @@ def form():
 @app.route('/submit', methods=['POST'])
 def submit():
     try:
-        # Get form data
         first_name = request.form['first_name']
         last_name = request.form['last_name']
         age = request.form['age']
@@ -78,10 +75,8 @@ def submit():
             filepath ='static/uploads/'+filename
             photo.save(os.path.join('static/uploads/', filename))
             
-        # Hash the password
         hashed_password = generate_password_hash(password)
 
-        # Save to database
         conn = get_db_connection()
         cursor = conn.cursor()
         cursor.execute(''' 

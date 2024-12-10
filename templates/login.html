@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='forms.css') }}">
+</head>
+<body>
+    <h1>Login</h1>
+
+    <!-- Flash messages display -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <form action="/login" method="POST">
+        <table>
+            <tr>
+                <td>Username:</td>
+                <td><input type="text" name="username" placeholder="Enter your username" required></td>
+            </tr>
+            <tr>
+                <td>Password:</td>
+                <td><input type="password" name="password" placeholder="Enter your password" required></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" value="Login">
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <br>
+    <a href="/">Go to Registration</a>
+</body>
+</html>

@@ -1,310 +1,326 @@
+/* General Page Styling */
 body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #6dd5ed, #2193b0); /* Gradient background */
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
-    height: 100vh;
-    color: white;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    color: #333;
 }
 
+/* Page Title */
 h1 {
-    text-align: center;
+    font-size: 36px;
     color: #fff;
-    font-size: 32px;
     margin-bottom: 20px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
+/* Flash Messages */
+ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+ul li {
+    background-color: #ffcccc;
+    color: #b30000;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Form Styling */
 form {
-    background-color: rgba(0, 0, 0, 0.7); 
-    padding: 30px;
+    background-color: #fff; /* White card background */
+    padding: 20px 30px;
     border-radius: 10px;
-    width: 100%;
-    max-width: 600px; /* Adjusted max width to prevent the box from being too narrow */
-    box-sizing: border-box; /* Ensures padding doesn't cause box shrinking */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 600px;
+    animation: fadeIn 0.8s ease-in-out;
 }
 
+/* Table Styling */
 table {
     width: 100%;
-    border-spacing: 15px 10px;
-    margin-top: 20px; /* Add some spacing between the form and table */
+    border-collapse: collapse;
 }
 
-input[type="text"], 
-input[type="tel"], 
-input[type="email"], 
-input[type="date"], 
-input[type="username"], 
-input[type="password"], 
-input[type="file"] {
+table td {
+    padding: 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+table td:first-child {
+    text-align: right;
+    font-weight: bold;
+}
+
+table input[type="text"],
+table input[type="password"],
+table input[type="email"],
+table input[type="tel"],
+table input[type="date"],
+table input[type="file"],
+table select {
     width: 100%;
     padding: 10px;
-    border: 2px solid #ddd;
+    font-size: 14px;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    margin-top: 5px;
-    font-size: 16px;
-    transition: border-color 0.3s;
+    box-sizing: border-box;
 }
 
-input[type="text"]:focus, 
-input[type="tel"]:focus, 
-input[type="email"]:focus, 
-input[type="date"]:focus, 
-input[type="username"]:focus, 
-input[type="password"]:focus {
-    border-color: #5c9dff;
+table input[type="radio"] {
+    margin-right: 5px;
+}
+
+/* Submit and Reset Buttons */
+table input[type="submit"],
+table input[type="reset"] {
+    background-color: #28a745; /* Green */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
+}
+
+table input[type="reset"] {
+    background-color: #dc3545; /* Red */
+}
+
+table input[type="submit"]:hover {
+    background-color: #218838; /* Darker green */
+}
+
+table input[type="reset"]:hover {
+    background-color: #c82333; /* Darker red */
+}
+
+/* Eye Button for Password Visibility */
+div {
+    position: relative;
+}
+
+/* Eye Button Styling */
+.eye-button {
+    position: absolute;
+    right: 10px; /* Align near the edge of the input box */
+    top: 50%;
+    transform: translateY(-50%);
+    background: none; /* No background */
+    border: none; /* No border */
+    font-size: 18px; /* Compact size */
+    cursor: pointer;
+    padding: 0; /* Remove unnecessary padding */
+    width: auto; /* Avoid stretching */
+    height: auto; /* Ensure compact height */
+    color: #666; /* Neutral color */
+    outline: none; /* Remove focus outline */
+    transition: transform 0.2s ease, font-size 0.2s ease;
+}
+
+/* No Hover Effect */
+.eye-button:hover {
+    font-size: 22px;
+    transform: translateY(-50%); /* Maintain vertical alignment */
+}
+
+/* Links and Action Buttons */
+div a {
+    text-decoration: none;
+}
+
+.form-button {
+    background-color: #007bff; /* Blue */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 10px 5px;
+    transition: background-color 0.3s ease;
+}
+
+.form-button:hover {
+    background-color: #0056b3; /* Darker blue */
+}
+
+/* Form Container Background */
+form {
+    background-color: rgba(255, 255, 255, 0.9); /* Slight transparency */
+    backdrop-filter: blur(5px); /* Frosted glass effect */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    form {
+        padding: 15px 20px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    table td {
+        font-size: 14px;
+    }
+
+    table input[type="text"],
+    table input[type="password"],
+    table input[type="email"],
+    table input[type="tel"],
+    table input[type="date"],
+    table input[type="file"],
+    table select {
+        font-size: 13px;
+    }
+
+    .form-button {
+        font-size: 14px;
+        padding: 8px 15px;
+    }
+}
+
+form label {
+    font-weight: bold;
+    color: #444;
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+}
+
+form input[type="text"],
+form input[type="number"],
+form select {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+form input[type="text"]:focus,
+form input[type="number"]:focus,
+form select:focus {
+    border-color: #2193b0; /* Highlight color */
+    box-shadow: 0 0 8px rgba(33, 147, 176, 0.5);
     outline: none;
 }
 
-input[type="submit"], 
-input[type="reset"],
-.see-registered-users {
-    width: 48%;
-    padding: 12px;
-    background-color: #5c9dff;
-    border: none;
+/* Submit Button */
+form button {
+    background-color: #2193b0; /* Blue button */
     color: white;
-    font-size: 16px;
-    border-radius: 5px;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
     cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-input[type="submit"]:hover, 
-input[type="reset"]:hover,
-.see-registered-users:hover {
-    background-color: #4a8cf7;
-}
-
-/* Styling for 'See Registered Users' button */
-.see-registered-users {
-    width: 100%; /* Ensure it takes full width like submit/reset */
-    margin-top: 10px; /* Add some spacing above */
-    background-color: #4a8cf7; /* Blue color like the submit/reset buttons */
-    padding: 12px; /* Ensure proper padding */
-    border-radius: 5px; /* Rounded corners */
-    font-size: 16px; /* Consistent font size */
-    transition: background-color 0.3s; /* Smooth hover transition */
-}
-
-.see-registered-users:hover {
-    background-color: #3a80e0; /* Slightly darker blue on hover */
-}
-
-/* Table styling */
-.user-table {
     width: 100%;
-    border-collapse: collapse;
-    background-color: #2a3d49; /* Darker background color for the table */
-    border-radius: 8px; /* Rounded corners for the table */
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.user-table th, .user-table td {
-    padding: 10px;
-    text-align: left;
-    border: 1px solid #444; /* Dark border color for table cells */
+form button:hover {
+    background-color: #006994; /* Darker blue */
+    transform: translateY(-2px); /* Subtle hover effect */
 }
 
-.user-table th {
-    background-color: #3e4c59; /* Slightly lighter dark shade for header */
-    color: #fff; /* White text for the header */
-}
-
-.user-table tr:nth-child(even) {
-    background-color: #3b4b58; /* Even rows with a subtle lighter dark shade */
-}
-
-.user-table tr:nth-child(odd) {
-    background-color: #2a3d49; /* Odd rows with the same dark color as the table */
-}
-
-.user-table tr:hover {
-    background-color: #55636d; /* Highlighted row on hover */
-    color: white; /* Change text color on hover */
-}
-
-/* Adjusting the font color for readability */
-.user-table td {
-    color: #ddd; /* Light grey text color for table data */
-}
-
-/* Styling for the Actions button */
-.action-column {
-    /* Remove any background or padding that might be causing the black box */
-    background-color: transparent; /* Remove background */
-    padding: 0; /* Remove any extra padding */
-}
-
-/* Correct button styling for Delete */
-.action-button {
-    background-color: #f44336; /* Red background for delete button */
-    color: white;
-    border: none;
-    padding: 8px 15px;
-    text-align: center;
-    font-size: 14px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-    box-shadow: none;  /* Remove shadow */
-    outline: none; /* Remove any outline */
-    background: #f44336; /* Ensure it stays red */
-}
-
-.action-button:hover {
-    background-color: #e53935; /* Darker red color when hovered */
-}
-
-/* Additional styling fixes */
-.action-column form {
-    display: inline-block;
-    margin: 0;
-}
-
-/* Styling the eye icon button */
-.eye-button {
-    background: none;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-    position: absolute;
-    right: 10px;  /* Position the icon to the right */
-    top: 50%;
-    transform: translateY(-50%);  /* Center the icon vertically */
-}
-
-.password-container {
-    display: flex;
-    align-items: center;
-}
-
-.input-field {
-    width: 100%;
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-}
-
-/* Styling for the 'Go Back to Registration' button */
-.go-back-button {
-    background-color: #ffa500; /* Orange */
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    text-align: center;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-    margin-top: 10px; /* Add some spacing */
-    width: 100%;
-}
-
-/* Hover effect for 'Go Back to Registration' button */
-.go-back-button:hover {
-    background-color: #ff7f00; /* Darker orange */
-}
-
-/* Optional: for mobile responsiveness */
-@media (max-width: 600px) {
-    .go-back-button {
-        width: 100%; /* Make it full width on smaller screens */
-        margin-top: 20px; /* More spacing between buttons */
-    }
-}
-
-/* Styling for the 'Go Back to Registration' button */
-.go-back-button {
-    background-color: #ffa500; /* Orange color */
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    text-align: center;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 8px; /* Rounded corners for the button */
-    transition: background-color 0.3s, transform 0.3s ease; /* Smooth color change and transform */
-    margin-top: 20px; /* Add some spacing from the previous content */
-    width: 100%; /* Full width of the parent container */
-    max-width: 300px; /* Optional: set a max width for better appearance */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
-}
-
-/* Hover effect for 'Go Back to Registration' button */
-.go-back-button:hover {
-    background-color: #ff7f00; /* Darker orange on hover */
-    transform: translateY(-3px); /* Slight lift effect on hover */
-}
-
-/* Focus effect for accessibility */
-.go-back-button:focus {
-    outline: none; /* Remove the default focus outline */
-    box-shadow: 0 0 0 2px #ff7f00; /* Orange outline for focus */
-}
-
-/* Optional: for mobile responsiveness */
-@media (max-width: 600px) {
-    .go-back-button {
-        width: 100%; /* Full width on smaller screens */
-        margin-top: 20px; /* Add spacing between buttons */
-    }
-}
-
-ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 20px 0;
-}
-
-li {
-    padding: 10px;
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
-    border-radius: 5px;
-}
-
+/* Go Back Button */
 a {
     display: inline-block;
-    padding: 10px 20px;
-    background-color: #3498db;
+    background-color: #ff6347; /* Tomato red */
     color: white;
-    font-size: 16px;
     text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 16px;
     margin-top: 20px;
-    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 a:hover {
-    background-color: #2980b9;
-    transform: scale(1.05);
+    background-color: #cc5040; /* Darker red */
+    transform: translateY(-2px); /* Subtle hover effect */
 }
 
-a:active {
-    background-color: #1c6f98;
+/* Fade-In Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.export-button {
-    background-color: #f44336;  /* Red background color */
+/* Responsive Design */
+@media (max-width: 768px) {
+    form {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    form label {
+        font-size: 14px;
+    }
+
+    form button {
+        font-size: 16px;
+    }
+
+    a {
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+}
+
+/* Specific Button Styling for index.html */
+.index-buttons {
+    background-color: #2193b0; /* Blue */
     color: white;
+    text-decoration: none;
+    padding: 12px 20px;
+    border: none; /* Remove any border */
+    border-radius: 8px;
     font-size: 16px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
+    margin: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: inline-block; /* Ensures proper spacing */
     cursor: pointer;
-    position: absolute;
-    top: 20px;
-    right: 20px;
 }
 
-.export-button:hover {
-    background-color: #e53935;  /* Darker red color on hover */
+.index-buttons:hover {
+    background-color: #006994; /* Darker blue on hover */
+    transform: translateY(-2px);
 }
 
+/* Remove Unwanted Borders or Outline */
+.index-buttons:focus {
+    outline: none;
+    box-shadow: none;
+}

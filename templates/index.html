@@ -79,10 +79,15 @@
         </table>
     </form>
 
-    <!-- Button to see registered users -->
-    <a href="{{ url_for('display') }}">
-        <button class="form-button">See Registered Users</button>
-    </a>
+    <!-- Buttons to see registered users and login -->
+    <div>
+        <a href="{{ url_for('display') }}">
+            <button class="index-buttons">See Registered Users</button>
+        </a>
+        <a href="{{ url_for('login') }}">
+            <button class="index-buttons">Already a user? Login</button>
+        </a>
+    </div>
 
     <script>
         function togglePassword() {

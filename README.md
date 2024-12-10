@@ -26,8 +26,6 @@ registration-app/
 ├── static/
 │   └── forms.css      # Styling for the application
 ├── users.db           # SQLite database to store user data
-├── requirements.txt   # Python dependencies
-├── vercel.json        # Vercel deployment configuration
 └── README.md          # Project documentation
 ```
 

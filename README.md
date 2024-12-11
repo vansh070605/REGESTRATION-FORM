@@ -127,10 +127,3 @@ This project is licensed under the **MIT License**. Refer to the `LICENSE` file 
 For questions or feedback, feel free to reach out:
 - **Email**: vansh070605@gmail.com
 ```
-
-### Changes Made:
-1. Improved **Features** section to highlight all aspects of the project.
-2. Expanded **Project Structure** for better clarity.
-3. Updated **Getting Started** instructions for consistency and simplicity.
-4. Included details for both local use and deployment in **Usage**.
-5. Organized **Contributing** and **License** sections for professionalism. 

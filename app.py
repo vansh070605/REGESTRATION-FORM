@@ -94,7 +94,7 @@ def submit():
         photo = request.files['photo']
         if photo and allowed_file(photo.filename):
             filename = secure_filename(photo.filename)
-            filepath ='static/uploads/'+filename
+            filepath = 'static/uploads/' + filename
             photo.save(os.path.join('static/uploads/', filename))
             
         hashed_password = generate_password_hash(password)
@@ -146,24 +146,29 @@ def logout():
 @app.route('/success')
 @login_required
 def success():
-    """Render the success page after login and display user data."""
-    user_id = session['user_id']  # Get the user_id from the session
-
-    # Fetch the logged-in user data from the database
+    user_id = session['user_id']
     conn = get_db_connection()
     cursor = conn.cursor()
+
+    # Get logged-in user's details
     cursor.execute('SELECT * FROM users WHERE id = %s', (user_id,))
     user = cursor.fetchone()
 
-    # Fetch family members associated with the logged-in user
+    # Get the logged-in user's family members
     cursor.execute('SELECT * FROM family_members WHERE user_id = %s', (user_id,))
     family_members = cursor.fetchall()
 
+    # Get all registered users
+    cursor.execute('SELECT * FROM users')
+    users = cursor.fetchall()
+
+    cursor.execute('SELECT * FROM family_members WHERE user_id = %s', (user_id,))
+    family_members = cursor.fetchall()
+
+    print(family_members)
+
     conn.close()
-
-    # Pass the user data and family members to the template
-    return render_template('success.html', user=user, family_members=family_members)
-
+    return render_template('success.html', user=user, family_members=family_members, users=users)
 
 
 @app.route('/display')
@@ -191,29 +196,55 @@ def delete_user(user_id):
         flash(f"Error deleting user: {e}")
     return redirect(url_for('display'))
 
+@app.route('/delete_family_member/<int:family_member_id>', methods=['GET'])
+@login_required
+def delete_family_member(family_member_id):
+    """Delete a family member from the database by their ID."""
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute('DELETE FROM family_members WHERE id = %s', (family_member_id,))
+        conn.commit()
+        conn.close()
+        flash("Family member deleted successfully!")
+    except mysql.connector.Error as e:
+        flash(f"Error deleting family member: {e}")
+    return redirect(url_for('success'))  # Redirect back to the success page
+
 @app.route('/add_family_member', methods=['GET', 'POST'])
 @login_required
 def add_family_member():
-    """Add a new family member."""
     if request.method == 'POST':
-        name = request.form['name']
+        # Extract form data
+        first_name = request.form['first_name']
         gender = request.form['gender']
         age = request.form['age']
-        user_id = session['user_id']
+        parent_name = request.form['parent_name']
+        parent_gender = request.form['parent_gender']
+        parent_mobile = request.form['parent_mobile']
+        parent_email = request.form['parent_email']
+        relation = request.form['relation']
 
+        user_id = session['user_id']  # Assuming logged-in user has an ID in the session
+
+        # Connect to the database
         conn = get_db_connection()
         cursor = conn.cursor()
-        cursor.execute(''' 
-            INSERT INTO family_members (user_id, name, gender, age)
-            VALUES (%s, %s, %s, %s)
-        ''', (user_id, name, gender, age))
+
+        # Insert family member into the database
+        cursor.execute('''
+    INSERT INTO family_members (user_id, first_name, gender, age, parent_name, parent_gender, parent_mobile, parent_email, relation)
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+''', (user_id, first_name, gender, age, parent_name, parent_gender, parent_mobile, parent_email, relation))
+
+
+
         conn.commit()
         conn.close()
 
-        flash("Family member added successfully!")
-        return redirect(url_for('success'))  # Redirect to success page to show updated family members
+        return redirect(url_for('success'))  # Redirect to success page after adding
 
-    return render_template('add_family_member.html')  # Render form to add family member
+    return render_template('add_family_member.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

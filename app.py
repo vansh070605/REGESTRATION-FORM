@@ -5,6 +5,9 @@ from werkzeug.utils import secure_filename
 import os
 from functools import wraps
 
+hashed_password = generate_password_hash('admin@123')
+print(hashed_password)
+
 app = Flask(__name__)
 app.secret_key = "app.secret_key"  # Secret key for session management
 
@@ -55,6 +58,7 @@ def init_db():
             name VARCHAR(255) NOT NULL,
             gender VARCHAR(50) NOT NULL,
             age INT NOT NULL,
+            relation VARCHAR(255),
             FOREIGN KEY (user_id) REFERENCES users(id)
         )
     ''')
@@ -64,39 +68,39 @@ def init_db():
 
 init_db()
 
-def login_required(f):
-    """Decorator to protect routes from unauthenticated access."""
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        if 'user_id' not in session:  # Check if user is logged in
-            flash('You need to log in first!', 'warning')
-            return redirect(url_for('login'))  # Redirect to login if not logged in
-        return f(*args, **kwargs)
-    return decorated_function
-
 @app.route('/')
 def form():
     """Render the registration form."""
     return render_template('index.html')
 
+@app.route('/index')
+def index():
+    return render_template('index.html')
+
 @app.route('/submit', methods=['POST'])
 def submit():
     try:
-        first_name = request.form['first_name']
-        last_name = request.form['last_name']
-        age = request.form['age']
-        gender = request.form['choice']
-        mobile = request.form['mobile']
-        email = request.form['email']
-        dob = request.form['dob']
-        username = request.form['username']
-        password = request.form['password']
-        photo = request.files['photo']
+        first_name = request.form.get('first_name')
+        last_name = request.form.get('last_name')
+        age = request.form.get('age')
+        gender = request.form.get('choice')
+        mobile = request.form.get('mobile')
+        email = request.form.get('email')
+        dob = request.form.get('dob')
+        username = request.form.get('username')
+        password = request.form.get('password')
+        photo = request.files.get('photo')
+
+        # Validate that all required fields are filled
+        if not first_name or not last_name or not mobile or not email or not username or not password:
+            flash("All fields are required.", "error")
+            return redirect(url_for('form'))
+
         if photo and allowed_file(photo.filename):
             filename = secure_filename(photo.filename)
             filepath = 'static/uploads/' + filename
             photo.save(os.path.join('static/uploads/', filename))
-            
+
         hashed_password = generate_password_hash(password)
 
         conn = get_db_connection()
@@ -114,9 +118,10 @@ def submit():
         flash("Error: Duplicate mobile, email, or username detected. Please use unique values.")
         return redirect(url_for('form'))
 
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    """Handle the login functionality."""
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -124,15 +129,15 @@ def login():
         conn = get_db_connection()
         cursor = conn.cursor()
         cursor.execute('SELECT * FROM users WHERE username = %s', (username,))
-        user = cursor.fetchone()  # Fetch the first row
+        user = cursor.fetchone()
 
-        if user and check_password_hash(user[9], password):  # Index 9 is the 'password' field in the result tuple
-            session['user_id'] = user[0]  # Index 0 is the 'id' field in the result tuple
+        if user and check_password_hash(user[9], password):  # user[9] is the password field
+            session['user_id'] = user[0]  # Store user ID in session
             flash('Login successful!', 'success')
-            return redirect(url_for('success'))  # Redirect to a success page after login
+            return redirect(url_for('success'))  # Redirect to success route
         else:
             flash('Invalid username or password', 'error')
-            return redirect(url_for('login'))  # Redirect back to login if invalid credentials
+            return redirect(url_for('login'))
 
     return render_template('login.html')
 
@@ -144,35 +149,34 @@ def logout():
     return redirect(url_for('form'))  # Redirect to the registration page after logout
 
 @app.route('/success')
-@login_required
 def success():
-    user_id = session['user_id']
-    conn = get_db_connection()
-    cursor = conn.cursor()
+    """Display logged-in user's details and family members."""
+    user_id = session.get('user_id')
 
-    # Get logged-in user's details
-    cursor.execute('SELECT * FROM users WHERE id = %s', (user_id,))
-    user = cursor.fetchone()
+    if user_id:
+        # Query the database to get user details
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute('SELECT * FROM users WHERE id = %s', (user_id,))
+        user = cursor.fetchone()  # Fetch user data from the database
 
-    # Get the logged-in user's family members
-    cursor.execute('SELECT * FROM family_members WHERE user_id = %s', (user_id,))
-    family_members = cursor.fetchall()
+        # Query to fetch family members
+        cursor.execute('SELECT * FROM family_members WHERE user_id = %s', (user_id,))
+        family_members = cursor.fetchall()
 
-    # Get all registered users
-    cursor.execute('SELECT * FROM users')
-    users = cursor.fetchall()
+        conn.close()
 
-    cursor.execute('SELECT * FROM family_members WHERE user_id = %s', (user_id,))
-    family_members = cursor.fetchall()
-
-    print(family_members)
-
-    conn.close()
-    return render_template('success.html', user=user, family_members=family_members, users=users)
-
+        if user:
+            # Pass user details and family members to the template
+            return render_template('success.html', user=user, family_members=family_members)
+        else:
+            flash("User not found.", "error")
+            return redirect(url_for('login'))  # Redirect to login if user not found
+    else:
+        flash("Please log in first.", "error")
+        return redirect(url_for('login'))  # Redirect to login if no session
 
 @app.route('/display')
-@login_required
 def display():
     """Display all registered users in a table."""
     conn = get_db_connection()
@@ -197,7 +201,6 @@ def delete_user(user_id):
     return redirect(url_for('display'))
 
 @app.route('/delete_family_member/<int:family_member_id>', methods=['GET'])
-@login_required
 def delete_family_member(family_member_id):
     """Delete a family member from the database by their ID."""
     try:
@@ -212,18 +215,13 @@ def delete_family_member(family_member_id):
     return redirect(url_for('success'))  # Redirect back to the success page
 
 @app.route('/add_family_member', methods=['GET', 'POST'])
-@login_required
 def add_family_member():
     if request.method == 'POST':
         # Extract form data
         first_name = request.form['first_name']
         gender = request.form['gender']
         age = request.form['age']
-        parent_name = request.form['parent_name']
-        parent_gender = request.form['parent_gender']
-        parent_mobile = request.form['parent_mobile']
-        parent_email = request.form['parent_email']
-        relation = request.form['relation']
+        relation = request.form['relation']  # This should now work correctly
 
         user_id = session['user_id']  # Assuming logged-in user has an ID in the session
 
@@ -233,11 +231,9 @@ def add_family_member():
 
         # Insert family member into the database
         cursor.execute('''
-    INSERT INTO family_members (user_id, first_name, gender, age, parent_name, parent_gender, parent_mobile, parent_email, relation)
-    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
-''', (user_id, first_name, gender, age, parent_name, parent_gender, parent_mobile, parent_email, relation))
-
-
+            INSERT INTO family_members (user_id, first_name, gender, age, relation)
+            VALUES (%s, %s, %s, %s, %s)
+        ''', (user_id, first_name, gender, age, relation))
 
         conn.commit()
         conn.close()
@@ -245,6 +241,29 @@ def add_family_member():
         return redirect(url_for('success'))  # Redirect to success page after adding
 
     return render_template('add_family_member.html')
+
+
+
+@app.route('/admin', methods=['GET'])
+def admin_page():
+    """Direct access to the admin page with login check."""
+    if 'user_id' in session:
+        # Check if the logged-in user is an admin (if you have an admin flag in the users table)
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute('SELECT * FROM users WHERE id = %s', (session['user_id'],))
+        user = cursor.fetchone()
+        conn.close()
+        
+        if user and user[10] == 'admin':  # Assume user[10] is the 'role' field
+            return render_template('admin.html')
+        else:
+            flash('You do not have access to this page.', 'error')
+            return redirect(url_for('form'))
+    else:
+        flash('Please log in first.', 'error')
+        return redirect(url_for('login'))
+
 
 if __name__ == '__main__':
     app.run(debug=True)

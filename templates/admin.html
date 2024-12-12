@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+</head>
+<body>
+
+<h2>Admin Page</h2>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>User First Name</th>
+            <th>User Last Name</th>
+            <th>Family Member First Name</th>
+            <th>Family Member Gender</th>
+            <th>Family Member Age</th>
+            <th>Family Member Relation</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in users_and_family_members %}
+            <tr>
+                <td>{{ row[0] }}</td>  <!-- User's first name -->
+                <td>{{ row[1] }}</td>  <!-- User's last name -->
+                <td>{{ row[2] }}</td>  <!-- Family member's first name -->
+                <td>{{ row[3] }}</td>  <!-- Family member's gender -->
+                <td>{{ row[4] }}</td>  <!-- Family member's age -->
+                <td>{{ row[5] }}</td>  <!-- Family member's relation -->
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</body>
+</html>

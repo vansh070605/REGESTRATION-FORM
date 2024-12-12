@@ -20,6 +20,7 @@
         {% endif %}
     {% endwith %}
 
+    <!-- Registration form -->
     <form id="registrationForm" action="/submit" method="POST" enctype="multipart/form-data">
         <table>
             <tr>
@@ -78,6 +79,12 @@
             </tr>
         </table>
     </form>
+
+    <!-- Conditional link for Admin to see family members -->
+    {% if session['user_id'] and session['is_admin'] %}
+    <a href="{{ url_for('admin_page') }}" class="btn btn-primary">Go to Admin</a>
+
+    {% endif %}
 
     <!-- Buttons to see registered users and login -->
     <div>

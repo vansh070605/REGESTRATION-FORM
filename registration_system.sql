@@ -55,3 +55,24 @@ CREATE TABLE IF NOT EXISTS family_members (
     age INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id)
 )
+
+ALTER TABLE users ADD COLUMN is_admin BOOLEAN DEFAULT FALSE;
+UPDATE users SET is_admin = TRUE WHERE username = 'admin_user';
+SELECT id FROM users WHERE username = 'admin_user';
+hashed_password = generate_password_hash('admin_password')
+
+INSERT INTO users (first_name, last_name, age, gender, mobile, email, dob, username, password, photo, is_admin) 
+VALUES ('Admin', 'User', 30, 'Male', '9876543210', 'admin@example.com', '1993-05-01', 'admin_user', 'hashed_password_here', 'path_to_image.jpg', TRUE);
+
+UPDATE users
+SET is_admin = TRUE
+WHERE username = 'existing_user_username';
+
+SELECT * FROM users WHERE is_admin = TRUE;
+SELECT * FROM users WHERE username = 'admin_user';
+SELECT username, is_admin FROM users WHERE username = 'admin_user';
+
+UPDATE users
+SET password = 'admin@123'
+WHERE id = 44;
+

@@ -15,10 +15,10 @@
     <table class="family-table">
         <thead>
             <tr>
-                <th>Gender</th>
-                <th>Age</th>
                 <th>Name</th>
+                <th>Gender</th>
                 <th>Relation</th>
+                <th>Age</th>
                 <th>Action</th> <!-- Column for delete action -->
             </tr>
         </thead>
@@ -26,23 +26,25 @@
             {% if family_members %}
                 {% for member in family_members %}
                     <tr>
-                        <td>{{ member[3] }}</td>  <!-- Family Member Gender -->
-                        <td>{{ member[4] }}</td>  <!-- Family Member Age -->
-                        <td>{{ member[7] }}</td>  <!-- Parent Name -->
-                        <td>{{ member[9] }}</td>  <!-- Relation -->
+                        <td>{{ member.name }}</td>  <!-- Family Member Gender -->
+                        <td>{{ member.gender }}</td>     <!-- Family Member Age -->
+                        <td>{{ member.relation }}</td>    <!-- Family Member Name -->
+                        <td>{{ member.age }}</td> <!-- Relation -->
                         <td>
                             <!-- Delete button to trigger deletion -->
-                            <a href="{{ url_for('delete_family_member', family_member_id=member[0]) }}" class="delete-button">Delete</a>
+                            <a href="{{ url_for('delete_family_member', family_member_id=member.id) }}" class="delete-button">Delete</a>
                         </td>
                     </tr>
                 {% endfor %}
             {% else %}
                 <tr>
-                    <td colspan="8" style="text-align: center;">No family members found.</td>
+                    <td colspan="5" style="text-align: center;">No family members found.</td>
                 </tr>
             {% endif %}
         </tbody>
     </table>
+    
+    
 
     <!-- Option to add family members -->
     <br>

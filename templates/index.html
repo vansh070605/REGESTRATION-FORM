@@ -80,12 +80,6 @@
         </table>
     </form>
 
-    <!-- Conditional link for Admin to see family members -->
-    {% if session['user_id'] and session['is_admin'] %}
-    <a href="{{ url_for('admin_page') }}" class="btn btn-primary">Go to Admin</a>
-
-    {% endif %}
-
     <!-- Buttons to see registered users and login -->
     <div>
         <a href="{{ url_for('display') }}">
@@ -93,6 +87,9 @@
         </a>
         <a href="{{ url_for('login') }}">
             <button class="index-buttons">Already a user? Login</button>
+        </a>
+        <a href="{{ url_for('admin_page') }}">
+            <button class="index-buttons">Go to Admin Page</button>
         </a>
     </div>
 

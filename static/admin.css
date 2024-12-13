@@ -1,0 +1,486 @@
+/* Admin Page Styles */
+.admin-container {
+    margin: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.admin-header {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+}
+
+.admin-header span {
+    color: #007bff;
+}
+
+.admin-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.admin-button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.admin-button:hover {
+    background-color: #0056b3;
+}
+
+.admin-users-table {
+    width: 100%;
+    margin-top: 30px;
+    border-collapse: collapse;
+}
+
+.admin-users-table th,
+.admin-users-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.admin-users-table th {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+}
+
+.admin-users-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.admin-actions {
+    display: flex;
+    justify-content: space-around;
+}
+
+.admin-actions button {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.admin-actions button:hover {
+    background-color: #c82333;
+}
+
+/* General Style for Flash Messages */
+.flash-message {
+    padding: 10px;
+    margin: 20px 0;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.flash-message.success {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.flash-message.error {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.flash-message.info {
+    background-color: #17a2b8;
+    color: #fff;
+}
+
+/* Admin Sidebar (Optional if needed) */
+.admin-sidebar {
+    width: 250px;
+    background-color: #343a40;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 20px;
+    color: #fff;
+}
+
+.admin-sidebar h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.admin-sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.admin-sidebar ul li {
+    margin: 15px 0;
+}
+
+.admin-sidebar ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.admin-sidebar ul li a:hover {
+    color: #007bff;
+}
+
+/* General Styling for the entire admin page */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.admin-container {
+    width: 80%;
+    margin: 20px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.admin-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.admin-header h1 {
+    font-size: 36px;
+    color: #2a2a2a;
+}
+
+.flash-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.flash-message.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.flash-message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* Table Styling */
+.admin-users-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+.admin-users-table th, .admin-users-table td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.admin-users-table th {
+    background-color: #007bff;
+    color: white;
+}
+
+.admin-users-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.admin-users-table tr:hover {
+    background-color: #ddd;
+}
+
+.admin-users-table td {
+    font-size: 14px;
+}
+
+.admin-users-table td a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+/* Button Styling */
+.admin-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.admin-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 0 10px;
+    transition: background-color 0.3s ease;
+}
+
+.admin-button:hover {
+    background-color: #0056b3;
+}
+
+.admin-button:active {
+    background-color: #003f7f;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .admin-container {
+        width: 95%;
+    }
+
+    .admin-header h1 {
+        font-size: 28px;
+    }
+
+    .admin-users-table th, .admin-users-table td {
+        padding: 8px;
+    }
+
+    .admin-button {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+}
+
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+/* Container */
+.container {
+    width: 80%;
+    margin: 20px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Header */
+h1, h2, h3 {
+    color: #333;
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* User section */
+.user {
+    margin-bottom: 40px;
+}
+
+/* Horizontal rule */
+hr {
+    border: 0;
+    border-top: 1px solid #ddd;
+    margin: 20px 0;
+}
+
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f3f4f6;
+}
+
+/* Container */
+.container {
+    width: 85%;
+    margin: 30px auto;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Header */
+h1, h2, h3 {
+    color: #444;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Registered Users Section */
+h2 {
+    color: #4CAF50;
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+.user {
+    margin-bottom: 50px;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+    font-size: 16px;
+}
+
+th {
+    background-color: #1e88e5;
+    color: white;
+}
+
+td {
+    background-color: #f9f9f9;
+}
+
+tr:nth-child(even) {
+    background-color: #f1f1f1;
+}
+
+tr:hover {
+    background-color: #e3f2fd;
+}
+
+/* User Details Section */
+.user-info {
+    background-color: #1e88e5;
+    padding: 20px;
+    color: white;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.user-info h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+/* Family Members Table */
+.family-members {
+    background-color: #ff7043;
+    padding: 20px;
+    color: white;
+    border-radius: 8px;
+}
+
+.family-members h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.family-members table {
+    background-color: #ffccbc;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.family-members th {
+    background-color: #d32f2f;
+}
+
+.family-members td {
+    background-color: #ffecdc;
+}
+
+/* Empty Table Message */
+.empty-message {
+    text-align: center;
+    color: #777;
+    font-size: 16px;
+    font-style: italic;
+}
+
+/* Horizontal Rule */
+hr {
+    border: 0;
+    border-top: 2px solid #ddd;
+    margin: 30px 0;
+}
+
+/* Button Styling */
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #388e3c;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    table {
+        font-size: 14px;
+    }
+
+    th, td {
+        padding: 10px;
+    }
+}

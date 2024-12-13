@@ -19,20 +19,22 @@ This is a simple Flask web application that provides a user-friendly interface f
 ```
 registration-app/
 ├── api/
-│   └── app.py                # Flask backend application
+│   └── app.py                   # Flask backend application
 ├── templates/
-│   ├── index.html            # Registration Form
+│   ├── index.html               # Registration Form
 │   ├── success.html
 │   ├── add_family_member.html
 │   ├── login.html
 │   ├── admin.html
-│   └── display.html          # Table displaying registered users
+│   └── display.html             # Table displaying registered users
 ├── static/
-│   ├── forms.css             # Styling for the forms
-│   ├── success.css           # Styling for the success page
+│   ├── uplaods/
+│   |  ├── all the images used
+│   ├── forms.css                # Styling for the forms
+│   ├── success.css              # Styling for the success page
 │   ├── admin.css
-├── regestration_system.sql   # SQLite database to store user data
-└── README.md                 # Project documentation
+├── regestration_system.sql      # SQLite database to store user data
+└── README.md                    # Project documentation
 ```
 
 ---

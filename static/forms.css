@@ -1,167 +1,326 @@
-/* Styles for Success Page */
+/* General Page Styling */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #28a745; /* Green success background */
-    color: white;
+    background: linear-gradient(135deg, #6dd5ed, #2193b0); /* Gradient background */
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     min-height: 100vh;
-    text-align: center;
-    position: relative;
+    color: #333;
 }
 
-/* Page Heading */
+/* Page Title */
 h1 {
-    font-size: 48px;
+    font-size: 36px;
+    color: #fff;
     margin-bottom: 20px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
-/* Paragraph Text */
-p {
-    font-size: 20px;
-    margin-bottom: 30px;
+/* Flash Messages */
+ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+ul li {
+    background-color: #ffcccc;
+    color: #b30000;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Form Styling */
+form {
+    background-color: #fff; /* White card background */
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 600px;
+    animation: fadeIn 0.8s ease-in-out;
 }
 
 /* Table Styling */
 table {
-    width: 80%;
-    margin: 20px auto;
+    width: 100%;
     border-collapse: collapse;
-    background-color: white;
-    color: #28a745;
-    border-radius: 10px;
-    overflow: hidden;
 }
 
-table th, table td {
-    padding: 12px 15px;
-    border: 1px solid #ddd;
-    text-align: center;
+table td {
+    padding: 10px;
     font-size: 16px;
+    color: #333;
 }
 
-table th {
-    background-color: #218838;
-    color: white;
-    font-size: 18px;
+table td:first-child {
+    text-align: right;
+    font-weight: bold;
 }
 
-table tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
-table tr:hover {
-    background-color: #e8f5e9;
-}
-
-/* Buttons */
-button {
-    background-color: #fff;
-    color: #28a745;
-    font-size: 16px;
-    padding: 10px 20px;
-    border: 2px solid #fff;
+table input[type="text"],
+table input[type="password"],
+table input[type="email"],
+table input[type="tel"],
+table input[type="date"],
+table input[type="file"],
+table select {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-    margin: 10px 0;
+    box-sizing: border-box;
 }
 
-button:hover {
-    background-color: #218838;
+table input[type="radio"] {
+    margin-right: 5px;
+}
+
+/* Submit and Reset Buttons */
+table input[type="submit"],
+table input[type="reset"] {
+    background-color: #28a745; /* Green */
     color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
 }
 
-/* Export Button Styling */
-.export-button {
+table input[type="reset"] {
+    background-color: #dc3545; /* Red */
+}
+
+table input[type="submit"]:hover {
+    background-color: #218838; /* Darker green */
+}
+
+table input[type="reset"]:hover {
+    background-color: #c82333; /* Darker red */
+}
+
+/* Eye Button for Password Visibility */
+div {
+    position: relative;
+}
+
+/* Eye Button Styling */
+.eye-button {
     position: absolute;
-    top: 20px;
-    right: 20px;
-    background-color: white;
-    color: #28a745;
-    font-size: 16px;
-    padding: 10px 20px;
-    border: 2px solid #28a745;
-    border-radius: 5px;
+    right: 10px; /* Align near the edge of the input box */
+    top: 50%;
+    transform: translateY(-50%);
+    background: none; /* No background */
+    border: none; /* No border */
+    font-size: 18px; /* Compact size */
     cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
+    padding: 0; /* Remove unnecessary padding */
+    width: auto; /* Avoid stretching */
+    height: auto; /* Ensure compact height */
+    color: #666; /* Neutral color */
+    outline: none; /* Remove focus outline */
+    transition: transform 0.2s ease, font-size 0.2s ease;
 }
 
-.export-button:hover {
-    background-color: #218838;
+/* No Hover Effect */
+.eye-button:hover {
+    font-size: 22px;
+    transform: translateY(-50%); /* Maintain vertical alignment */
+}
+
+/* Links and Action Buttons */
+div a {
+    text-decoration: none;
+}
+
+.form-button {
+    background-color: #007bff; /* Blue */
     color: white;
-}
-
-/* Add Family Member Button */
-.add-family-member {
-    background-color: #007bff; /* Blue background */
-    color: white;
     padding: 10px 20px;
-    border-radius: 5px;
     border: none;
+    border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s ease;
+    margin: 10px 5px;
+    transition: background-color 0.3s ease;
 }
 
-.add-family-member:hover {
-    background-color: #0056b3;
-    transform: scale(1.05);
+.form-button:hover {
+    background-color: #0056b3; /* Darker blue */
 }
 
-/* Go Back to Registration Button */
-.go-back-registration {
-    background-color: #ffc107; /* Yellow background */
-    color: black;
-    padding: 10px 20px;
-    border-radius: 5px;
-    border: none;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s ease;
-}
-
-.go-back-registration:hover {
-    background-color: #e0a800;
-    transform: scale(1.05);
+/* Form Container Background */
+form {
+    background-color: rgba(255, 255, 255, 0.9); /* Slight transparency */
+    backdrop-filter: blur(5px); /* Frosted glass effect */
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    table {
-        width: 95%;
+    form {
+        padding: 15px 20px;
     }
 
     h1 {
-        font-size: 36px;
+        font-size: 28px;
     }
 
-    p {
-        font-size: 18px;
-    }
-
-    button, .export-button {
+    table td {
         font-size: 14px;
-        padding: 8px 16px;
+    }
+
+    table input[type="text"],
+    table input[type="password"],
+    table input[type="email"],
+    table input[type="tel"],
+    table input[type="date"],
+    table input[type="file"],
+    table select {
+        font-size: 13px;
+    }
+
+    .form-button {
+        font-size: 14px;
+        padding: 8px 15px;
     }
 }
 
-/* Delete Button Styling */
-.delete-button {
-    background-color: #dc3545; /* Red background */
-    color: white;
-    font-size: 14px;
-    padding: 5px 10px;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: background-color 0.3s, transform 0.3s ease;
+form label {
+    font-weight: bold;
+    color: #444;
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
 }
 
-.delete-button:hover {
-    background-color: #c82333;
-    transform: scale(1.1);
+form input[type="text"],
+form input[type="number"],
+form select {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+form input[type="text"]:focus,
+form input[type="number"]:focus,
+form select:focus {
+    border-color: #2193b0; /* Highlight color */
+    box-shadow: 0 0 8px rgba(33, 147, 176, 0.5);
+    outline: none;
+}
+
+/* Submit Button */
+form button {
+    background-color: #2193b0; /* Blue button */
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+form button:hover {
+    background-color: #006994; /* Darker blue */
+    transform: translateY(-2px); /* Subtle hover effect */
+}
+
+/* Go Back Button */
+a {
+    display: inline-block;
+    background-color: #ff6347; /* Tomato red */
+    color: white;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    margin-top: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+a:hover {
+    background-color: #cc5040; /* Darker red */
+    transform: translateY(-2px); /* Subtle hover effect */
+}
+
+/* Fade-In Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    form {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    form label {
+        font-size: 14px;
+    }
+
+    form button {
+        font-size: 16px;
+    }
+
+    a {
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+}
+
+/* Specific Button Styling for index.html */
+.index-buttons {
+    background-color: #2193b0; /* Blue */
+    color: white;
+    text-decoration: none;
+    padding: 12px 20px;
+    border: none; /* Remove any border */
+    border-radius: 8px;
+    font-size: 16px;
+    margin: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: inline-block; /* Ensures proper spacing */
+    cursor: pointer;
+}
+
+.index-buttons:hover {
+    background-color: #006994; /* Darker blue on hover */
+    transform: translateY(-2px);
+}
+
+/* Remove Unwanted Borders or Outline */
+.index-buttons:focus {
+    outline: none;
+    box-shadow: none;
 }

@@ -3,36 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Page</title>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
 </head>
 <body>
 
-<h2>Admin Page</h2>
-
-<table border="1">
-    <thead>
-        <tr>
-            <th>User First Name</th>
-            <th>User Last Name</th>
-            <th>Family Member First Name</th>
-            <th>Family Member Gender</th>
-            <th>Family Member Age</th>
-            <th>Family Member Relation</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for row in users_and_family_members %}
-            <tr>
-                <td>{{ row[0] }}</td>  <!-- User's first name -->
-                <td>{{ row[1] }}</td>  <!-- User's last name -->
-                <td>{{ row[2] }}</td>  <!-- Family member's first name -->
-                <td>{{ row[3] }}</td>  <!-- Family member's gender -->
-                <td>{{ row[4] }}</td>  <!-- Family member's age -->
-                <td>{{ row[5] }}</td>  <!-- Family member's relation -->
-            </tr>
+    <div class="container">
+        <h1>Admin Dashboard</h1>
+        
+        <h2>Registered Users and Their Family Members</h2>
+        
+        {% for user_id, user_data in users_data.items() %}
+            <div class="user">
+                <h3>User Information</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Username</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ user_data['user'][0] }}</td>
+                            <td>{{ user_data['user'][1] }}</td>
+                            <td>{{ user_data['user'][2] }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3>Family Members</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Gender</th>
+                            <th>Age</th>
+                            <th>Relation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if user_data['family_members'] %}
+                            {% for family_member in user_data['family_members'] %}
+                                <tr>
+                                    <td>{{ family_member[0] }}</td>
+                                    <td>{{ family_member[1] }}</td>
+                                    <td>{{ family_member[2] }}</td>
+                                    <td>{{ family_member[3] }}</td>
+                                </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="4">No family members added.</td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+                <hr>
+            </div>
         {% endfor %}
-    </tbody>
-</table>
+    </div>
 
 </body>
 </html>

@@ -76,3 +76,13 @@ UPDATE users
 SET password = 'admin@123'
 WHERE id = 44;
 
+ALTER TABLE users
+MODIFY first_name VARCHAR(255) NOT NULL;
+
+SHOW COLUMNS FROM users;
+SELECT * FROM family_members;
+ALTER TABLE family_members MODIFY COLUMN first_name VARCHAR(255) NULL;
+
+ALTER TABLE family_members MODIFY COLUMN first_name VARCHAR(255) DEFAULT 'Unknown';
+
+

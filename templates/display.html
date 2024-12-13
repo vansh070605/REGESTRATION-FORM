@@ -1,325 +1,211 @@
-/* General Page Styling */
-body {
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #6dd5ed, #2193b0); /* Gradient background */
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    color: #333;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registered Users</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='forms.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+            position: relative;
+        }
 
-/* Page Title */
-h1 {
-    font-size: 36px;
-    color: #fff;
-    margin-bottom: 20px;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-}
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 20px;
+        }
 
-/* Flash Messages */
-ul {
-    list-style: none;
-    padding: 0;
-    margin-bottom: 20px;
-    text-align: center;
-}
+        .export-button {
+            background-color: #f44336;
+            color: white;
+            font-size: 16px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
 
-ul li {
-    background-color: #ffcccc;
-    color: #b30000;
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 5px;
-    font-size: 16px;
-}
+        .export-button:hover {
+            background-color: #e53935;
+        }
 
-/* Form Styling */
-form {
-    background-color: #fff; /* White card background */
-    padding: 20px 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    width: 90%;
-    max-width: 600px;
-}
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 60px;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+        }
 
-/* Table Styling */
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
 
-table td {
-    padding: 10px;
-    font-size: 16px;
-    color: #333;
-}
+        th {
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+        }
 
-table td:first-child {
-    text-align: right;
-    font-weight: bold;
-}
+        td {
+            font-size: 14px;
+            color: #555;
+        }
 
-table input[type="text"],
-table input[type="password"],
-table input[type="email"],
-table input[type="tel"],
-table input[type="date"],
-table input[type="file"],
-table select {
-    width: 100%;
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
 
-table input[type="radio"] {
-    margin-right: 5px;
-}
+        tr:hover {
+            background-color: #f1f1f1;
+        }
 
-/* Submit and Reset Buttons */
-table input[type="submit"],
-table input[type="reset"] {
-    background-color: #28a745; /* Green */
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-right: 10px;
-}
+        .dataTables_wrapper {
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
 
-table input[type="reset"] {
-    background-color: #dc3545; /* Red */
-}
+        .dataTables_length, .dataTables_filter {
+            font-size: 14px;
+        }
 
-table input[type="submit"]:hover {
-    background-color: #218838; /* Darker green */
-}
+        .dataTables_paginate {
+            text-align: center;
+        }
 
-table input[type="reset"]:hover {
-    background-color: #c82333; /* Darker red */
-}
+        .dataTables_paginate a {
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 0 5px;
+        }
 
-/* Eye Button for Password Visibility */
-div {
-    position: relative;
-}
+        .dataTables_paginate a:hover {
+            background-color: #45a049;
+        }
 
-/* Eye Button Styling */
-.eye-button {
-    position: absolute;
-    right: 10px; /* Align near the edge of the input box */
-    top: 50%;
-    transform: translateY(-50%);
-    background: none; /* No background */
-    border: none; /* No border */
-    font-size: 18px; /* Compact size */
-    cursor: pointer;
-    padding: 0; /* Remove unnecessary padding */
-    width: auto; /* Avoid stretching */
-    height: auto; /* Ensure compact height */
-    color: #666; /* Neutral color */
-    outline: none; /* Remove focus outline */
-    transition: transform 0.2s ease, font-size 0.2s ease;
-}
+        .dataTables_paginate .current {
+            background-color: #388e3c;
+        }
 
-/* No Hover Effect */
-.eye-button:hover {
-    font-size: 22px;
-    transform: translateY(-50%); /* Maintain vertical alignment */
-}
+        .btn {
+            padding: 8px 16px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-/* Links and Action Buttons */
-div a {
-    text-decoration: none;
-}
+        .btn:hover {
+            background-color: #c0392b;
+        }
 
-.form-button {
-    background-color: #007bff; /* Blue */
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    margin: 10px 5px;
-    transition: background-color 0.3s ease;
-}
+        img {
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <h1>Registered Users</h1>
 
-.form-button:hover {
-    background-color: #0056b3; /* Darker blue */
-}
+    <!-- Export button -->
+    <button class="export-button" onclick="exportTableToExcel('usersTable', 'users')">Export to Excel</button>
 
-/* Form Container Background */
-form {
-    background-color: rgba(255, 255, 255, 0.9); /* Slight transparency */
-    backdrop-filter: blur(5px); /* Frosted glass effect */
-}
+    <table id="usersTable" class="display">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Age</th>
+                <th>Gender</th>
+                <th>Mobile</th>
+                <th>Email</th>
+                <th>DOB</th>
+                <th>Username</th>
+                <th>Photo</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in rows %}
+            <tr>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+                <td>{{ row[3] }}</td>
+                <td>{{ row[4] }}</td>
+                <td>{{ row[5] }}</td>
+                <td>{{ row[6] }}</td>
+                <td>{{ row[7] }}</td>
+                <td>{{ row[8] }}</td>
+                <td>
+                    {% if row[10] %}
+                    <img src="{{ row[10] }}" alt="User Photo">
+                    {% else %}
+                        No photo
+                    {% endif %}
+                </td>
+                <td>
+                    <form method="POST" action="{{ url_for('delete_user', user_id=row[0]) }}">
+                        <button type="submit" class="btn">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    form {
-        padding: 15px 20px;
+    <!-- jQuery and DataTables JS -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#usersTable').DataTable();
+    });
+
+    function exportTableToExcel(tableId, filename) {
+        var table = document.getElementById(tableId);
+        var rows = table.rows;
+        var csv = [];
+        for (var i = 0; i < rows.length; i++) {
+            var row = rows[i];
+            var cells = row.cells;
+            var csvRow = [];
+            for (var j = 0; j < cells.length; j++) {
+                csvRow.push('"' + cells[j].innerText + '"');
+            }
+            csv.push(csvRow.join(','));
+        }
+
+        var csvString = csv.join('\n');
+        var blob = new Blob([csvString], { type: 'text/csv' });
+        var link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = filename + '.csv';
+        link.click();
     }
-
-    h1 {
-        font-size: 28px;
-    }
-
-    table td {
-        font-size: 14px;
-    }
-
-    table input[type="text"],
-    table input[type="password"],
-    table input[type="email"],
-    table input[type="tel"],
-    table input[type="date"],
-    table input[type="file"],
-    table select {
-        font-size: 13px;
-    }
-
-    .form-button {
-        font-size: 14px;
-        padding: 8px 15px;
-    }
-}
-
-form label {
-    font-weight: bold;
-    color: #444;
-    display: block;
-    margin-bottom: 8px;
-    font-size: 16px;
-}
-
-form input[type="text"],
-form input[type="number"],
-form select {
-    width: 100%;
-    padding: 12px 15px;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 16px;
-    box-sizing: border-box;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-form input[type="text"]:focus,
-form input[type="number"]:focus,
-form select:focus {
-    border-color: #2193b0; /* Highlight color */
-    box-shadow: 0 0 8px rgba(33, 147, 176, 0.5);
-    outline: none;
-}
-
-/* Submit Button */
-form button {
-    background-color: #2193b0; /* Blue button */
-    color: white;
-    padding: 15px;
-    border: none;
-    border-radius: 8px;
-    font-size: 18px;
-    cursor: pointer;
-    width: 100%;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-form button:hover {
-    background-color: #006994; /* Darker blue */
-    transform: translateY(-2px); /* Subtle hover effect */
-}
-
-/* Go Back Button */
-a {
-    display: inline-block;
-    background-color: #ff6347; /* Tomato red */
-    color: white;
-    text-decoration: none;
-    padding: 12px 20px;
-    border-radius: 8px;
-    font-size: 16px;
-    margin-top: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-a:hover {
-    background-color: #cc5040; /* Darker red */
-    transform: translateY(-2px); /* Subtle hover effect */
-}
-
-/* Fade-In Animation */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    form {
-        padding: 20px;
-    }
-
-    h1 {
-        font-size: 28px;
-    }
-
-    form label {
-        font-size: 14px;
-    }
-
-    form button {
-        font-size: 16px;
-    }
-
-    a {
-        font-size: 14px;
-        padding: 10px 15px;
-    }
-}
-
-/* Specific Button Styling for index.html */
-.index-buttons {
-    background-color: #2193b0; /* Blue */
-    color: white;
-    text-decoration: none;
-    padding: 12px 20px;
-    border: none; /* Remove any border */
-    border-radius: 8px;
-    font-size: 16px;
-    margin: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    display: inline-block; /* Ensures proper spacing */
-    cursor: pointer;
-}
-
-.index-buttons:hover {
-    background-color: #006994; /* Darker blue on hover */
-    transform: translateY(-2px);
-}
-
-/* Remove Unwanted Borders or Outline */
-.index-buttons:focus {
-    outline: none;
-    box-shadow: none;
-}
+</script>
+    <br>
+    <a href="/">Go Back to Registration</a>
+</body>
+</html>
